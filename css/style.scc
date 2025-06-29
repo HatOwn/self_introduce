@@ -5,3 +5,15 @@
   background-position: center center;
   padding: 100px 0;
 }
+.animated-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* 半透明黑底 */
+  z-index: 0;
+}
+
+.animated-header > .container {
+  position: relative;
+  z-index: 1;
+}
