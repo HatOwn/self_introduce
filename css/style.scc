@@ -1,0 +1,7 @@
+.animated-header {
+  background-image: url('../img/rainbowcat.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 100px 0;
+}
