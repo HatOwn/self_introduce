@@ -3,89 +3,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的自我介紹網站</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <title>廖宇晟的個人網站</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    /* 1. 全域與導覽列修正
+      - scroll-behavior: 讓頁面內錨點跳轉時有平滑的滾動動畫。
+      - scroll-padding-top: 這是修正「固定導覽列遮擋內容」的最新、最完美的方法。
+        它會在跳轉到錨點時，自動在頂部預留 70px 的空間，數值可依導覽列高度調整。
+    */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      scroll-padding-top: 70px; 
+    }
+
+    /* 2. 首頁英雄區塊 (Hero Section)
+      - 使用 Flexbox 實現完美的垂直和水平置中。
+      - min-height: 100vh; 讓此區塊至少和瀏覽器視窗一樣高，創造全螢幕效果。
+      - position: relative; 是為了讓 ::before 遮罩層能正確定位。
+    */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('https://i.imgur.com/T0yQ8y6.gif'); /* 替換成您的背景圖，這裡使用一個範例 GIF */
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+    }
+
+    /* 3. 遮罩層 (Overlay)
+      - 製作一個半透明黑色遮罩，疊在背景圖之上、文字之下，確保文字清晰可讀。
+    */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1; /* 確保遮罩在背景之上 */
+    }
+
+    /* 4. 英雄區塊內容
+      - 確保文字和圖片內容顯示在遮罩層的上方。
+    */
+    .hero .container {
+      position: relative;
+      z-index: 2; /* 確保內容在遮罩之上 */
+    }
+
+    /* 5. 個人頭像樣式 */
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover; /* 確保圖片不變形 */
+      border: 4px solid white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    
+    /* 6. 區塊通用樣式 */
+    .section-padding {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    
+    /* 7. 技能區塊圖示樣式 */
+    .skill-icon {
+        font-size: 3rem; /* 圖示大小 */
+        color: #0d6efd;  /* Bootstrap 主要藍色 */
+    }
+
+  </style>
 </head>
 <body>
 
-<!-- 導覽列 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">廖宇晟</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#about">關於我</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">技能</a></li>
-        <li class="nav-item"><a class="nav-link" href="#portfolio">作品集</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">聯絡我</a></li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home">廖宇晟</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">關於我</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">技能興趣</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">作品集</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">聯絡我</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- 首頁區塊 -->
-<header class="animated-header text-white text-center" id="home">
-  <div class="container">
-    <img src="img/huh.gif" class="rounded-circle" width="150" alt="我的照片">
-    <h1 class="mt-3">廖宇晟</h1>
-    <p class="lead">喜歡設計與科技的學生 </p>
-  </div>
-</header>
-
-<!-- 關於我 -->
-<section class="py-5" id="about">
-  <div class="container">
-    <h2 class="text-center">關於我</h2>
-    <p class="text-center">我目前就讀於國立東華大學電機系，AI 與人機互動充滿熱情。</p>
-  </div>
-</section>
-
-<!-- 技能 -->
-<section class="bg-light py-5" id="skills">
-  <div class="container">
-    <h2 class="text-center">食性</h2>
-    <div class="row text-center">
-      <div class="col-md-4">蘭州拉麵</div>
-      <div class="col-md-4">i miss</div>
-      <div class="col-md-4">全家</div>
+  <header id="home" class="hero">
+    <div class="container">
+      <img src="https://i.imgur.com/O4vGfQO.gif" class="rounded-circle profile-img" alt="我的照片">
+      <h1 class="display-4 fw-bold mt-4">廖宇晟</h1>
+      <p class="lead fs-4">一位對設計與科技充滿熱情的學生</p>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- 作品集 -->
-<section class="py-5" id="portfolio">
-  <div class="container">
-    <h2 class="text-center">作品集</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card mb-3">
-          <img src="img/huh2.gif" class="card-img-top" alt="作品圖示">
-          <div class="card-body">
-            <h5 class="card-title">作品名稱 1</h5>
-            <p class="card-text">case 1</p>
-            <a href="#" class="btn btn-primary" target="_blank">觀看作品</a>
-          </div>
+  <section id="about" class="section-padding">
+    <div class="container">
+      <h2 class="text-center mb-4">關於我</h2>
+      <p class="text-center w-75 mx-auto">
+        您好！我目前就讀於國立東華大學電機系，對人工智慧 (AI)、人機互動 (HCI) 以及前端開發領域充滿了探索的熱情。我喜歡將創新的想法透過程式碼與設計實現出來，並致力於創造有價值且易於使用的產品。
+      </p>
+    </div>
+  </section>
+
+  <section id="skills" class="bg-light section-padding">
+    <div class="container">
+      <h2 class="text-center mb-5">技能與興趣</h2>
+      <div class="row text-center g-4">
+        <div class="col-md-4">
+            <i class="bi bi-code-slash skill-icon mb-3"></i>
+            <h4>程式開發</h4>
+            <p class="text-muted">熟悉 Python, C++, JavaScript</p>
+        </div>
+        <div class="col-md-4">
+            <i class="bi bi-palette skill-icon mb-3"></i>
+            <h4>UI/UX 設計</h4>
+            <p class="text-muted">喜歡使用 Figma 進行介面設計</p>
+        </div>
+        <div class="col-md-4">
+            <i class="bi bi-robot skill-icon mb-3"></i>
+            <h4>人工智慧</h4>
+            <p class="text-muted">對機器學習與深度學習有興趣</p>
         </div>
       </div>
-      <!-- 可新增更多作品 -->
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 聯絡我 -->
-<section class="bg-light py-5" id="contact">
-  <div class="container text-center">
-    <h2>聯絡我</h2>
-    <p>Email: yourname@email.com</p>
-    <a href="https://github.com/yourgithub" target="_blank">GitHub</a> |
-    <a href="https://linkedin.com/in/yourlinkedin" target="_blank">LinkedIn</a>
-  </div>
-</section>
+  <section id="portfolio" class="section-padding">
+    <div class="container">
+      <h2 class="text-center mb-5">作品集</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <img src="https://i.imgur.com/ePPlwza.png" class="card-img-top" alt="作品1圖片">
+            <div class="card-body">
+              <h5 class="card-title">作品名稱 1</h5>
+              <p class="card-text">這裡是您的作品簡短描述，說明這個專案的目標與使用的技術。</p>
+              <a href="#" class="btn btn-primary" target="_blank">查看專案</a>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+  </section>
 
-<footer class="text-center py-3 bg-dark text-white">
-  © 2025 廖宇晟 All rights reserved.
-</footer>
+  <section id="contact" class="bg-light section-padding">
+    <div class="container text-center">
+      <h2 class="mb-4">聯絡我</h2>
+      <p>期待與您交流！您可以透過以下方式找到我：</p>
+      <p class="fs-5">
+        <i class="bi bi-envelope-fill"></i> <a href="mailto:yourname@email.com" class="text-decoration-none">yourname@email.com</a>
+      </p>
+      <div>
+        <a href="https://github.com/yourgithub" target="_blank" class="btn btn-dark btn-lg mx-2"><i class="bi bi-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/yourlinkedin" target="_blank" class="btn btn-primary btn-lg mx-2"><i class="bi bi-linkedin"></i> LinkedIn</a>
+      </div>
+    </div>
+  </section>
 
+  <footer class="text-center py-4 bg-dark text-white">
+    <p class="mb-0">© 2025 廖宇晟 All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
