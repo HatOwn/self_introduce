@@ -1,19 +1,22 @@
 .animated-header {
+  position: relative;  /* ✅ 加上這行解決定位錯亂 */
   background-image: url('../img/rainbowcat.gif');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   padding: 100px 0;
+  overflow: hidden;  /* ✅ 防止遮罩 overflow 導致怪異效果 */
 }
+
 .animated-header::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3); /* 半透明黑底 */
+  background: rgba(0, 0, 0, 0.3); /* 半透明遮罩 */
   z-index: 0;
 }
 
 .animated-header > .container {
   position: relative;
-  z-index: 1;
+  z-index: 1;  /* ✅ 確保容器內容疊在遮罩之上 */
 }
