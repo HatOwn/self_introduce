@@ -1,24 +1,32 @@
-/* ✅ 解決 header 被固定導覽列蓋住的問題 */
+/* 首頁區塊含背景 GIF 與遮罩 */
 .animated-header {
   position: relative;
-  background-image: url('../img/rainbowcat.gif');
+  background-image: url('../img/rainbowcat.gif'); /* ← 確認這個 GIF 在 img 資料夾 */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  padding: 150px 0 100px; /* 上面多留出空間，推開導覽列 */
+  padding: 150px 0 100px; /* ↑ 上方額外預留空間以避免導覽列遮擋 */
   overflow: hidden;
-  margin-top: 56px; /* 一般 Bootstrap 導覽列高度為 56px，可視情況調整 */
+  margin-top: 56px; /* Bootstrap fixed-top 導覽列的高度推開 */
 }
 
+/* 遮罩層：讓字看得清楚 */
 .animated-header::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35); /* 黑色半透明 */
   z-index: 0;
 }
 
+/* header 內容疊在遮罩上 */
 .animated-header > .container {
   position: relative;
   z-index: 1;
+}
+
+/* 可選：讓圖片和文字更美觀 */
+.rounded-circle {
+  border: 4px solid white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
